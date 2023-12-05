@@ -44,7 +44,7 @@ window.onload = function () {
 
     // Load images when they are ready
     birdImg = new Image();
-    birdImg.src = "../Images/flappybird.png";
+    birdImg.src = "Images/flappybird.png";
     birdImg.onload = function () {
     };
 
