@@ -1,0 +1,22 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    background-image: linear-gradient(90deg, blue, lime);
+}
+
+#board {
+    /*background-color: skyblue;*/
+    background-image: url(../Images/bg_5.png);
+}
+
+button {
+    position: fixed;
+    top: 0;
+    left: 0;
+    font-size: 30px;
+    padding: 5px;
+    margin: 20px;
+    background-color: purple;
+    color: white;
+    border-radius: 10px;
+}
