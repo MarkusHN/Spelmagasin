@@ -49,10 +49,10 @@ window.onload = function () {
     };
 
     topPipeImg = new Image();
-    topPipeImg.src = "../Images/Pipetop.png";
+    topPipeImg.src = "Images/Pipetop.png";
 
     bottomPipeImg = new Image();
-    bottomPipeImg.src = "../Images/Pipebottom.png";
+    bottomPipeImg.src = "Images/Pipebottom.png";
 
     requestAnimationFrame(update);
     setInterval(placePipes, 1500); //every 1.5 seconds
