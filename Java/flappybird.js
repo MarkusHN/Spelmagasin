@@ -138,7 +138,7 @@ function placePipes() {
 }
 
 function moveBird(e) {
-    if (e.code == "Space" || e.code == "ArrowUp" || e.code == "KeyX" || e.code == "touch") {
+    if (e.code == "Space" || e.code == "ArrowUp" || e.code == "KeyX" || e.code == "") {
         //jump
         velocityY = -6;
     }
@@ -159,17 +159,3 @@ function detectCollision(a, b) {
         a.y < b.y + b.height &&
         a.y + a.height > b.y;
 }
-
-// Example using touch events in JavaScript
-element.addEventListener('touchstart', function(e) {
-    // Handle touch start event
-  });
-  
-  element.addEventListener('touchmove', function(e) {
-    // Handle touch move event
-  });
-  
-  element.addEventListener('touchend', function(e) {
-    // Handle touch end event
-  });
-  
