@@ -63,7 +63,7 @@ function updateHighScoreBoard() {
 
     // Display top 5 high scores
     let highScoreList = document.getElementById("highScoreList");
-    highScoreList.innerHTML = "<h2>High Scores:</h2>";
+    highScoreList.innerHTML = "<h2>High Score: </h2>";
     for (let i = 0; i < Math.min(5, highScores.length); i++) {
         highScoreList.innerHTML += "<p>" + (i + 1) + ". " + highScores[i] + "</p>";
     }
