@@ -43,7 +43,7 @@ function updateHighScoreBoard(newScore) {
     localStorage.setItem('highScores', JSON.stringify(highScores));
 
     const highScoreList = document.getElementById('highScoreList');
-    highScoreList.innerHTML = highScores.map((score, index) => `<li>#${index + 1}${score}</li>`).join('');
+    highScoreList.innerHTML = highScores.map((score, index) => `<li>${index + 1}. ${score}</li>`).join('');
 }
 
 const closeButton = document.getElementById('closeButton');
