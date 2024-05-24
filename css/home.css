@@ -11,7 +11,7 @@
     color: rgb(33, 25, 81);
 }
   
-@-webkit-keyframes glow {
+@keyframes glow {
     from {
       text-shadow: 0 0 10px #fff, 0 0 10px magenta, 0 0 20px magenta, 0 0 30px magenta, 0 0 40px magenta, 0 0 50px magenta, 0 0 60px magenta;
     }

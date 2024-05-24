@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click the Button</title>
+    <link rel="stylesheet" href="css/click-the-button.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>Click the Button Game</h1>
+        <p id="score">Score: 0</p>
+        <p id="time">Time: 10</p>
+        <button id="clickButton" disabled>Click Me!</button>
+        <div id="highScoreBoard">
+            <h2>High Scores:</h2>
+            <ul id="highScoreList"></ul>
+        </div>
+    </div>
+    
+    <div id="startGameModal" class="modal">
+        <div class="modal-content">
+            <h2>Welcome to the Game!</h2>
+            <button id="startButton">Start Game</button>
+        </div>
+    </div>
+    
+    <div id="gameOverModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="closeButton">&times;</span>
+            <h2>Game Over!</h2>
+            <p id="finalScore">Your score is: 0</p>
+        </div>
+    </div>
+    
+    <script src="Java/click-the-button.js"></script>
+</body>
+</html>

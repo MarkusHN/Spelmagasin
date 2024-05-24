@@ -10,8 +10,14 @@
 </head>
 
 <body>
-    <button onclick="history.back()">Tilbake</button>
     <canvas id="board"></canvas>
+    <button class="backButton" onclick="history.back()">Tilbake</button>
+    <div class="highScore">
+        <div id="highScoreList"></div>
+        <button class="resetHighScore" onclick="resetHighScores()">Reset High Scores</button>
+    </div>
+
+
     <script src="Java/flappybird.js"></script>
 </body>
 
