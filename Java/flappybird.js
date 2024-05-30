@@ -285,3 +285,54 @@ function detectCollision(a, b) {
         a.y < b.y + b.height &&
         a.y + a.height > b.y;
 }
+
+// Function to add the start button
+function addStartButton() {
+    console.log("Adding start button...");
+    let startButton = document.createElement("button");
+    startButton.innerHTML = "Start Game";
+    startButton.id = "startButton";
+    startButton.style.position = "absolute";
+    startButton.style.left = "50%";
+    startButton.style.top = "70%";
+    startButton.style.transform = "translate(-50%, -50%)";
+    startButton.style.padding = "10px 20px";
+    startButton.style.fontSize = "20px";
+    startButton.style.zIndex = "10";
+    startButton.style.backgroundColor = "#ff0";
+    startButton.style.border = "2px solid #000";
+    startButton.style.color = "#000";
+    document.body.appendChild(startButton);
+
+    startButton.addEventListener("click", function () {
+        startButton.remove();
+        gameStarted = true;
+        requestAnimationFrame(update);
+    });
+}
+
+// Function to add the restart button
+function addRestartButton() {
+    console.log("Adding restart button...");
+    let restartButton = document.createElement("button");
+    restartButton.innerHTML = "Restart Game";
+    restartButton.id = "restartButton";
+    restartButton.style.position = "absolute";
+    restartButton.style.left = "50%";
+    restartButton.style.top = "70%";
+    restartButton.style.transform = "translate(-50%, -50%)";
+    restartButton.style.padding = "10px 20px";
+    restartButton.style.fontSize = "20px";
+    restartButton.style.zIndex = "10";
+    restartButton.style.backgroundColor = "#ff0";
+    restartButton.style.border = "2px solid #000";
+    restartButton.style.color = "#000";
+    document.body.appendChild(restartButton);
+
+    restartButton.addEventListener("click", function () {
+        restartButton.remove();
+        initializeGame();
+        gameStarted = true;
+        requestAnimationFrame(update);
+    });
+}
