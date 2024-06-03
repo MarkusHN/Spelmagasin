@@ -38,6 +38,9 @@ let gravity = 0.4; // Gravity affecting the bird
 let gameOver = false; // Flag indicating whether the game is over
 let score = 0; // Player's score
 
+// Flag indicating whether the game has started
+let gameStarted = false;
+
 // Define an array to store high scores
 let highScores = [];
 
@@ -63,7 +66,7 @@ function updateHighScoreBoard() {
 
     // Display top 5 high scores
     let highScoreList = document.getElementById("highScoreList");
-    highScoreList.innerHTML = "<h2>High Score: </h2>";
+    highScoreList.innerHTML = "<h2>High Scores:</h2>";
     for (let i = 0; i < Math.min(5, highScores.length); i++) {
         highScoreList.innerHTML += "<p>" + (i + 1) + ". " + highScores[i] + "</p>";
     }
@@ -100,6 +103,16 @@ function resetHighScores() {
     updateHighScoreBoard();
 }
 
+// Function to initialize the game
+function initializeGame() {
+    // Reset game status variables
+    bird.y = birdY;
+    pipeArray = [];
+    score = 0;
+    gameOver = false;
+    velocityY = 0;
+}
+
 // Call loadHighScores function when the game starts to load existing high scores
 window.onload = function () {
     // Load and display high scores
@@ -121,9 +134,11 @@ window.onload = function () {
     bottomPipeImg.src = "Images/Pipebottom.png";
 
     updateCanvasSize(); // Update canvas size
-    requestAnimationFrame(update);
     setInterval(placePipes, 1500); //every 1.5 seconds
+
     document.addEventListener("keydown", moveBird);
+    addStartButton();
+    requestAnimationFrame(update);
 };
 
 // Function to update the canvas size based on the screen size
@@ -141,10 +156,8 @@ function updateCanvasSize() {
 window.addEventListener("resize", updateCanvasSize);
 
 // Main game loop to update the game state
-// Main game loop to update the game state
 function update() {
     if (!gameOver) {
-        requestAnimationFrame(update);
         context.clearRect(0, 0, board.width, board.height);
 
         // Update bird position based on gravity
@@ -158,6 +171,7 @@ function update() {
             // Add game over animation here
             gameOverAnimation();
             updateHighScores(score);
+            addRestartButton();
             return;
         }
 
@@ -179,6 +193,7 @@ function update() {
                 // Add game over animation here
                 gameOverAnimation();
                 updateHighScores(score);
+                addRestartButton();
                 return;
             }
         }
@@ -192,9 +207,8 @@ function update() {
         context.fillStyle = "white";
         context.font = "45px sans-serif";
         context.fillText(score, 5, 45);
-    } else {
-        // Game over animation has already been triggered, do nothing here
     }
+    requestAnimationFrame(update);
 }
 
 // Function for game over animation
@@ -212,11 +226,9 @@ function gameOverAnimation() {
     context.fillText(gameOverText, textX, textY);
 }
 
-
-
 // Function to place pipes
 function placePipes() {
-    if (gameOver) {
+    if (gameOver || !gameStarted) {
         return;
     }
 
@@ -248,23 +260,38 @@ function placePipes() {
 // Function to handle bird movement
 function moveBird(e) {
     if (e.code == "Space" || e.code == "ArrowUp" || e.code == "KeyX" || e.code == "") {
-        velocityY = -6;
+        if (!gameStarted) {
+            gameStarted = true;
+            velocityY = -6;
+        } else {
+            velocityY = -6;
+        }
     }
 
     // Reset game if it's over
     if (gameOver) {
-        bird.y = birdY;
-        pipeArray = [];
-        score = 0;
-        gameOver = false;
-        requestAnimationFrame(update);
+        initializeGame();
+        gameStarted = true;
+        velocityY = -6;
     }
 }
 
 // Function called when a touch event is detected
 function touchHandler(event) {
     event.preventDefault();
-    jump();
+    if (!gameStarted) {
+        gameStarted = true;
+        velocityY = -6;
+    } else {
+        jump();
+    }
+
+    // Reset game if it's over
+    if (gameOver) {
+        initializeGame();
+        gameStarted = true;
+        velocityY = -6;
+    }
 }
 
 // Add event listeners for touch events
@@ -288,7 +315,6 @@ function detectCollision(a, b) {
 
 // Function to add the start button
 function addStartButton() {
-    console.log("Adding start button...");
     let startButton = document.createElement("button");
     startButton.innerHTML = "Start Game";
     startButton.id = "startButton";
@@ -306,6 +332,7 @@ function addStartButton() {
 
     startButton.addEventListener("click", function () {
         startButton.remove();
+        initializeGame();
         gameStarted = true;
         requestAnimationFrame(update);
     });
@@ -313,7 +340,6 @@ function addStartButton() {
 
 // Function to add the restart button
 function addRestartButton() {
-    console.log("Adding restart button...");
     let restartButton = document.createElement("button");
     restartButton.innerHTML = "Restart Game";
     restartButton.id = "restartButton";
@@ -334,5 +360,6 @@ function addRestartButton() {
         initializeGame();
         gameStarted = true;
         requestAnimationFrame(update);
+        startButton.remove();
     });
 }
